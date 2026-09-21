@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { technologies, whyUsPoints } from '../data/content';
+import { technologies, whyUsPoints, philosophyPoints, adminFeatures } from '../data/content';
 
 export default function AboutPage() {
   return (
@@ -150,6 +150,50 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Complete Business Solution */}
+      <section className="pb-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
+              More Than Just Development
+            </h2>
+            <p className="text-zinc-400 max-w-2xl mx-auto">
+              Every project includes a complete business management system with admin dashboards, 
+              client portals, order tracking, and automated workflows.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {adminFeatures.map((feature, i) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="p-6 rounded-2xl border border-white/5 bg-[#111] hover:border-indigo-500/20 transition-all duration-300"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <span className="text-3xl">{feature.icon}</span>
+                  {feature.metrics && (
+                    <span className="text-xs font-mono text-indigo-400 bg-indigo-500/10 px-2 py-1 rounded">
+                      {feature.metrics}
+                    </span>
+                  )}
+                </div>
+                <h3 className="font-display text-base font-semibold mb-2">{feature.title}</h3>
+                <p className="text-sm text-zinc-400 leading-relaxed">{feature.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="pb-32">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
@@ -158,18 +202,19 @@ export default function AboutPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-display text-2xl sm:text-3xl font-bold mb-4">
-              Let's build something exceptional together
+            <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
+              Ready to Transform Your Business?
             </h2>
-            <p className="text-zinc-400 mb-8">
-              Ready to turn your idea into a working digital product?
+            <p className="text-lg text-zinc-400 mb-8">
+              Let's build something extraordinary together. Complete digital solutions with admin dashboards, 
+              client portals, and everything you need to scale.
             </p>
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-zinc-100 transition-all"
+              className="group inline-flex items-center gap-2 px-10 py-5 bg-white text-black font-semibold rounded-full hover:bg-zinc-100 transition-all"
             >
-              Start a Project
-              <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              Start Your Project
+              <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M7 17L17 7M17 7H7M17 7V17" />
               </svg>
             </Link>

@@ -9,6 +9,19 @@ export interface Service {
   image: string;
 }
 
+export interface AdminFeature {
+  title: string;
+  description: string;
+  icon: string;
+  metrics?: string;
+}
+
+export interface ClientPortalFeature {
+  title: string;
+  description: string;
+  icon: string;
+}
+
 export interface Project {
   id: string;
   name: string;
@@ -234,5 +247,96 @@ export const whyUsPoints = [
   {
     title: 'Transparent Process',
     description: 'You always understand what is being designed, built and delivered — no black boxes.'
+  }
+];
+
+export const adminFeatures: AdminFeature[] = [
+  {
+    title: 'Real-time Order Tracking',
+    description: 'Monitor every order from placement to delivery with live status updates and automated notifications.',
+    icon: '📦',
+    metrics: '99.9% uptime'
+  },
+  {
+    title: 'Client Management Dashboard',
+    description: 'Complete overview of all clients, their projects, communication history, and billing status in one place.',
+    icon: '👥',
+    metrics: '50+ clients'
+  },
+  {
+    title: 'Automated Workflow Engine',
+    description: 'Set up custom workflows that automatically trigger actions based on events, deadlines, or client interactions.',
+    icon: '⚙️',
+    metrics: '10x faster'
+  },
+  {
+    title: 'Analytics & Reporting',
+    description: 'Deep insights into business performance, client satisfaction, project profitability, and team productivity.',
+    icon: '📊',
+    metrics: 'Real-time data'
+  },
+  {
+    title: 'Invoice & Payment System',
+    description: 'Generate professional invoices, track payments, send reminders, and integrate with payment gateways.',
+    icon: '💳',
+    metrics: 'Auto-sync'
+  },
+  {
+    title: 'Team Collaboration Tools',
+    description: 'Internal messaging, task assignment, file sharing, and project timeline management for your entire team.',
+    icon: '💬',
+    metrics: 'Unified comms'
+  }
+];
+
+export const clientPortalFeatures: ClientPortalFeature[] = [
+  {
+    title: 'Project Dashboard',
+    description: 'Clients see real-time progress, milestones, and deliverables with full transparency.',
+    icon: '🎯'
+  },
+  {
+    title: 'Document Hub',
+    description: 'All project documents, contracts, and deliverables organized and accessible 24/7.',
+    icon: '📁'
+  },
+  {
+    title: 'Communication Center',
+    description: 'Direct messaging, feedback system, and approval workflows in one unified interface.',
+    icon: '💬'
+  },
+  {
+    title: 'Billing & Invoices',
+    description: 'View invoices, payment history, and make payments directly through the portal.',
+    icon: '💰'
+  },
+  {
+    title: 'Support Tickets',
+    description: 'Submit support requests, track status, and get responses from your dedicated team.',
+    icon: '🎫'
+  },
+  {
+    title: 'Analytics Access',
+    description: 'Clients can view their own project analytics, usage stats, and performance metrics.',
+    icon: '📈'
+  }
+];
+
+export const philosophyPoints = [
+  {
+    title: 'We Don\'t Just Build, We Transform',
+    description: 'Every project is an opportunity to elevate your business. We combine cutting-edge technology with strategic thinking to create digital experiences that don\'t just work—they inspire.'
+  },
+  {
+    title: 'Speed Meets Precision',
+    description: 'Using AI-assisted development and Vibe Coding, we deliver faster without compromising quality. But speed isn\'t just about code—it\'s about understanding your vision immediately and executing flawlessly.'
+  },
+  {
+    title: 'Your Success is Our Blueprint',
+    description: 'We measure our success by yours. Every decision, every design choice, every line of code is optimized for your business goals, your users, and your growth.'
+  },
+  {
+    title: 'Transparency Builds Trust',
+    description: 'No black boxes. No hidden processes. You see everything—progress, challenges, solutions. Because trust isn\'t given, it\'s earned through complete transparency.'
   }
 ];
