@@ -1,5 +1,5 @@
 import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import Layout from './components/Layout';
 import PageTransition from './components/PageTransition';
 import HomePage from './pages/HomePage';
@@ -32,9 +32,22 @@ function AnimatedRoutes() {
   );
 }
 
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
+  return (
+    <motion.div
+      className="scroll-progress"
+      style={{ scaleX }}
+    />
+  );
+}
+
 function App() {
   return (
     <HashRouter>
+      <ScrollProgress />
       <Layout>
         <AnimatedRoutes />
       </Layout>

@@ -42,7 +42,7 @@ export default function HomePage() {
             opacity: [0.2, 0.4, 0.2] 
           }}
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[100px]"
+          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[100px] animate-morph"
         />
         <motion.div
           animate={{ 
@@ -51,7 +51,17 @@ export default function HomePage() {
             opacity: [0.15, 0.3, 0.15] 
           }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear", delay: 3 }}
-          className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[120px]"
+          className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[120px] animate-morph"
+          style={{ animationDelay: '2s' }}
+        />
+        <motion.div
+          animate={{ 
+            scale: [1, 1.2, 1], 
+            opacity: [0.1, 0.25, 0.1] 
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 5 }}
+          className="absolute top-1/2 right-1/3 w-[400px] h-[400px] bg-pink-500/10 rounded-full blur-[80px] animate-morph"
+          style={{ animationDelay: '4s' }}
         />
 
         {/* Floating Particles */}
@@ -105,11 +115,30 @@ export default function HomePage() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tight leading-[0.85] mb-8"
           >
-            <span className="block">Build Digital</span>
-            <span className="block mt-2 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <motion.span 
+              className="block"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              Build Digital
+            </motion.span>
+            <motion.span 
+              className="block mt-2 animate-gradient-text"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            >
               Products at the
-            </span>
-            <span className="block mt-2">Speed of Ideas</span>
+            </motion.span>
+            <motion.span 
+              className="block mt-2 font-serif-italic text-indigo-300"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              Speed of Ideas
+            </motion.span>
           </motion.h1>
 
           {/* Subheading */}
@@ -222,32 +251,66 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <span className="text-xs font-mono text-indigo-400 uppercase tracking-wider mb-4 block">Our Philosophy</span>
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-              Why Clients Choose Us
-            </h2>
-            <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+            <motion.span 
+              className="text-xs font-mono-custom text-indigo-400 uppercase tracking-wider mb-4 block"
+              initial={{ opacity: 0, letterSpacing: '0.5em' }}
+              whileInView={{ opacity: 1, letterSpacing: '0.2em' }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              Our Philosophy
+            </motion.span>
+            <motion.h2 
+              className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            >
+              Why Clients <span className="font-serif-italic text-indigo-300">Choose</span> Us
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-zinc-400 max-w-2xl mx-auto"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
               We don't just build products. We create digital experiences that transform businesses.
-            </p>
+            </motion.p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8">
             {philosophyPoints.map((point, i) => (
               <motion.div
                 key={point.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group p-8 rounded-2xl border border-white/5 bg-[#111] hover:border-indigo-500/30 transition-all duration-500"
+                transition={{ delay: i * 0.1, duration: 0.6 }}
+                whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                className="group relative p-8 rounded-2xl border border-white/5 bg-[#111] hover:border-indigo-500/30 transition-all duration-500 overflow-hidden"
               >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-indigo-400 font-mono text-lg font-bold">{String(i + 1).padStart(2, '0')}</span>
+                {/* Animated gradient border */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="absolute inset-0 rounded-2xl animate-border-gradient" style={{ padding: '2px' }}>
+                    <div className="w-full h-full rounded-2xl bg-[#111]" />
+                  </div>
                 </div>
-                <h3 className="font-display text-xl font-semibold mb-4 group-hover:text-indigo-300 transition-colors">
-                  {point.title}
-                </h3>
-                <p className="text-zinc-400 leading-relaxed">{point.description}</p>
+                
+                <div className="relative z-10">
+                  <motion.div 
+                    className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300"
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <span className="text-indigo-400 font-mono-custom text-lg font-bold">{String(i + 1).padStart(2, '0')}</span>
+                  </motion.div>
+                  <h3 className="font-display text-xl font-semibold mb-4 group-hover:text-indigo-300 transition-colors">
+                    {point.title}
+                  </h3>
+                  <p className="text-zinc-400 leading-relaxed">{point.description}</p>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -276,21 +339,38 @@ export default function HomePage() {
             {services.map((service, i) => (
               <motion.div
                 key={service.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                whileHover={{ y: -10, transition: { duration: 0.3 } }}
               >
                 <Link to={`/services/${service.id}`} className="group block">
-                  <div className="relative h-80 rounded-2xl overflow-hidden">
-                    <img 
+                  <div className="relative h-80 rounded-2xl overflow-hidden spotlight">
+                    <motion.img 
                       src={service.image} 
                       alt={service.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="w-full h-full object-cover"
+                      whileHover={{ scale: 1.15 }}
+                      transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent" />
+                    
+                    {/* Animated overlay */}
+                    <motion.div 
+                      className="absolute inset-0 bg-gradient-to-br from-indigo-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-indigo-500/10 group-hover:via-purple-500/10 group-hover:to-pink-500/10 transition-all duration-500"
+                    />
+                    
                     <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <span className="text-xs font-mono text-indigo-400 mb-2 block">{service.number}</span>
+                      <motion.span 
+                        className="text-xs font-mono-custom text-indigo-400 mb-2 block"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.1 + 0.2 }}
+                      >
+                        {service.number}
+                      </motion.span>
                       <h3 className="font-display text-2xl font-semibold mb-2 group-hover:text-indigo-300 transition-colors">
                         {service.title}
                       </h3>
@@ -344,18 +424,33 @@ export default function HomePage() {
                 {adminFeatures.slice(0, 4).map((feature, i) => (
                   <motion.div
                     key={feature.title}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, x: -30, scale: 0.95 }}
+                    whileInView={{ opacity: 1, x: 0, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="flex items-start gap-4 p-4 rounded-xl border border-white/5 bg-[#111] hover:border-indigo-500/20 transition-all"
+                    transition={{ delay: i * 0.1, duration: 0.5 }}
+                    whileHover={{ x: 10, transition: { duration: 0.3 } }}
+                    className="flex items-start gap-4 p-4 rounded-xl border border-white/5 bg-[#111] hover:border-indigo-500/20 transition-all group"
                   >
-                    <span className="text-2xl">{feature.icon}</span>
+                    <motion.span 
+                      className="text-2xl"
+                      whileHover={{ rotate: 360, scale: 1.2 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      {feature.icon}
+                    </motion.span>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-1">
-                        <h3 className="font-semibold text-sm">{feature.title}</h3>
+                        <h3 className="font-semibold text-sm group-hover:text-indigo-300 transition-colors">{feature.title}</h3>
                         {feature.metrics && (
-                          <span className="text-xs text-indigo-400 font-mono">{feature.metrics}</span>
+                          <motion.span 
+                            className="text-xs text-indigo-400 font-mono-custom bg-indigo-500/10 px-2 py-1 rounded"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: i * 0.1 + 0.2 }}
+                          >
+                            {feature.metrics}
+                          </motion.span>
                         )}
                       </div>
                       <p className="text-xs text-zinc-400">{feature.description}</p>
@@ -463,14 +558,25 @@ export default function HomePage() {
                 {clientPortalFeatures.map((feature, i) => (
                   <motion.div
                     key={feature.title}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+                    whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: i * 0.05 }}
-                    className="p-4 rounded-xl border border-white/5 bg-[#111] hover:border-purple-500/20 transition-all"
+                    transition={{ delay: i * 0.08, duration: 0.5, type: "spring" }}
+                    whileHover={{ 
+                      scale: 1.05, 
+                      y: -5, 
+                      transition: { duration: 0.3 } 
+                    }}
+                    className="p-4 rounded-xl border border-white/5 bg-[#111] hover:border-purple-500/20 transition-all group cursor-pointer"
                   >
-                    <span className="text-2xl mb-2 block">{feature.icon}</span>
-                    <h3 className="font-semibold text-sm mb-1">{feature.title}</h3>
+                    <motion.span 
+                      className="text-2xl mb-2 block"
+                      whileHover={{ rotate: 360, scale: 1.3 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      {feature.icon}
+                    </motion.span>
+                    <h3 className="font-semibold text-sm mb-1 group-hover:text-purple-300 transition-colors">{feature.title}</h3>
                     <p className="text-xs text-zinc-400">{feature.description}</p>
                   </motion.div>
                 ))}
@@ -551,9 +657,22 @@ export default function HomePage() {
       <section className="py-32 relative overflow-hidden">
         <div className="absolute inset-0">
           <motion.div
-            animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-            transition={{ duration: 8, repeat: Infinity }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-indigo-500/10 rounded-full blur-[150px]"
+            animate={{ 
+              scale: [1, 1.3, 1], 
+              opacity: [0.3, 0.5, 0.3],
+              rotate: [0, 180, 360]
+            }}
+            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-indigo-500/10 rounded-full blur-[150px] animate-morph"
+          />
+          <motion.div
+            animate={{ 
+              scale: [1.2, 1, 1.2], 
+              opacity: [0.2, 0.4, 0.2],
+              rotate: [360, 180, 0]
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear", delay: 5 }}
+            className="absolute top-1/3 left-1/3 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[120px] animate-morph"
           />
         </div>
         
@@ -562,33 +681,71 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
           >
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+            <motion.h2 
+              className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            >
               Ready to Build Something
-              <span className="block mt-2 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              <motion.span 
+                className="block mt-2 animate-gradient-text"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
                 Extraordinary?
-              </span>
-            </h2>
-            <p className="text-lg text-zinc-400 mb-10 max-w-2xl mx-auto">
+              </motion.span>
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-zinc-400 mb-10 max-w-2xl mx-auto"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
               Let's turn your idea into a working digital product. Fast, thoughtful, and built with cutting-edge technology.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                to="/contact"
-                className="group relative inline-flex items-center gap-2 px-10 py-5 bg-white text-black font-semibold rounded-full hover:bg-zinc-100 transition-all duration-300 overflow-hidden"
-              >
-                <span className="relative z-10">Start Your Project</span>
-                <svg className="w-5 h-5 relative z-10 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg>
-              </Link>
-              <Link
-                to="/process"
-                className="inline-flex items-center gap-2 px-10 py-5 border-2 border-white/20 text-white font-semibold rounded-full hover:bg-white/5 hover:border-white/40 transition-all duration-300"
-              >
-                See Our Process
-              </Link>
-            </div>
+            </motion.p>
+            <motion.div 
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Link
+                  to="/contact"
+                  className="group relative inline-flex items-center gap-2 px-10 py-5 bg-white text-black font-semibold rounded-full hover:bg-zinc-100 transition-all duration-300 overflow-hidden magnetic-btn"
+                >
+                  <span className="relative z-10">Start Your Project</span>
+                  <motion.svg 
+                    className="w-5 h-5 relative z-10"
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2.5"
+                  >
+                    <path d="M7 17L17 7M17 7H7M17 7V17" />
+                  </motion.svg>
+                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+                </Link>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Link
+                  to="/process"
+                  className="inline-flex items-center gap-2 px-10 py-5 border-2 border-white/20 text-white font-semibold rounded-full hover:bg-white/5 hover:border-white/40 transition-all duration-300 magnetic-btn"
+                >
+                  See Our Process
+                </Link>
+              </motion.div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
