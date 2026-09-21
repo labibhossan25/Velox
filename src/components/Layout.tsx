@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import CursorTrail from './CursorTrail';
 
 function CursorGlow() {
   const [pos, setPos] = useState({ x: -100, y: -100 });
@@ -65,6 +66,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="relative min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden">
+      <CursorTrail />
       <CursorGlow />
       {/* Navigation */}
       <motion.nav
